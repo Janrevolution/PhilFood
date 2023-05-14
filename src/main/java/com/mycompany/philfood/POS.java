@@ -30,9 +30,6 @@ public class POS extends javax.swing.JFrame {
     int total;
     int change = 0;
 
-    /**
-     * Creates new form POS
-     */
     public POS(String name) {
         initComponents();
         Image icon = new ImageIcon(this.getClass().getResource("/images/icon.png")).getImage();
@@ -436,6 +433,7 @@ public class POS extends javax.swing.JFrame {
 
         txtChange.setEditable(false);
 
+        btnVoid.setBackground(new java.awt.Color(255, 0, 0));
         btnVoid.setFont(new java.awt.Font("SF UI  Text", 1, 36)); // NOI18N
         btnVoid.setText("VOID");
         btnVoid.addActionListener(new java.awt.event.ActionListener() {
@@ -444,6 +442,7 @@ public class POS extends javax.swing.JFrame {
             }
         });
 
+        btnPrint.setBackground(new java.awt.Color(0, 255, 51));
         btnPrint.setFont(new java.awt.Font("SF UI  Text", 1, 36)); // NOI18N
         btnPrint.setText("PRINT");
         btnPrint.addActionListener(new java.awt.event.ActionListener() {
@@ -539,15 +538,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnLechon.getText(),
-            price = 150,
+            price = 250,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }   
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnLechonActionPerformed
 
@@ -555,15 +554,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnCrispyPata.getText(),
-            price = 150,
+            price = 190,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnCrispyPataActionPerformed
 
@@ -571,15 +570,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnSinugba.getText(),
-            price = 150,
+            price = 130,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnSinugbaActionPerformed
 
@@ -587,15 +586,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnTinola.getText(),
-            price = 150,
+            price = 190,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnTinolaActionPerformed
 
@@ -603,15 +602,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnSinigang.getText(),
-            price = 150,
+            price = 120,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnSinigangActionPerformed
 
@@ -619,15 +618,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnBulalo.getText(),
-            price = 150,
+            price = 230,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnBulaloActionPerformed
 
@@ -635,15 +634,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnBistek.getText(),
-            price = 150,
+            price = 100,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnBistekActionPerformed
 
@@ -651,15 +650,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnCaldereta.getText(),
-            price = 150,
+            price = 130,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnCalderetaActionPerformed
 
@@ -667,15 +666,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnGiniling.getText(),
-            price = 150,
+            price = 100,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnGinilingActionPerformed
 
@@ -683,15 +682,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnHalohalo.getText(),
-            price = 150,
+            price = 70,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnHalohaloActionPerformed
 
@@ -699,15 +698,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnSagotGulaman.getText(),
-            price = 150,
+            price = 30,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnSagotGulamanActionPerformed
 
@@ -715,15 +714,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnTaho.getText(),
-            price = 150,
+            price = 30,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnTahoActionPerformed
 
@@ -731,15 +730,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnBukoSalad.getText(),
-            price = 150,
+            price = 70,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnBukoSaladActionPerformed
 
@@ -747,15 +746,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnBukoPandan.getText(),
-            price = 150,
+            price = 30,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnBukoPandanActionPerformed
 
@@ -763,15 +762,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnTapioca.getText(),
-            price = 150,
+            price = 70,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnTapiocaActionPerformed
 
@@ -779,15 +778,15 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnMangoShake.getText(),
-            price = 150,
+            price = 90,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));
     }//GEN-LAST:event_btnMangoShakeActionPerformed
 
@@ -795,30 +794,30 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnAvocadoShake.getText(),
-            price = 150,
+            price = 900,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));    }//GEN-LAST:event_btnAvocadoShakeActionPerformed
 
     private void btnSikwateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSikwateActionPerformed
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnSikwate.getText(),
-            price = 150,
+            price = 50,
             qty = 1,
             total = qty * price,
         });
         
             sum = 0;
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-        sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
-    }
+                sum = sum + Integer.parseInt(jTable1.getValueAt(i, 3).toString());
+            }
     txtTotal.setText(Integer.toString(sum));    }//GEN-LAST:event_btnSikwateActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -852,34 +851,34 @@ public class POS extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCashActionPerformed
 
     private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
-    String total = txtTotal.getText();
-    String cash = txtCash.getText();
-    String change = txtChange.getText();
+        String total = txtTotal.getText();
+        String cash = txtCash.getText();
+        String change = txtChange.getText();
 
-    JFileChooser fileChooser = new JFileChooser();
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma-separated values", "csv");
-    fileChooser.setFileFilter(filter);
-    
-    int returnValue = fileChooser.showSaveDialog(null);
-    if (returnValue == JFileChooser.APPROVE_OPTION) {
-        File selectedFile = fileChooser.getSelectedFile();
-        String filePath = selectedFile.getAbsolutePath();
-        if (!filePath.endsWith(".csv")) {
-            filePath += ".csv";
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma-separated values", "csv");
+        fileChooser.setFileFilter(filter);
+
+        int returnValue = fileChooser.showSaveDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String filePath = selectedFile.getAbsolutePath();
+            if (!filePath.endsWith(".csv")) {
+                filePath += ".csv";
+            }
+            try {
+                FileWriter fw = new FileWriter(filePath);
+                BufferedWriter bw = new BufferedWriter(fw);
+
+                bw.write("Total,Cash,Change\n");
+                bw.write(total + "," + cash + "," + change + "\n");
+
+                bw.close();
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            FileWriter fw = new FileWriter(filePath);
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            bw.write("Total,Cash,Change\n");
-            bw.write(total + "," + cash + "," + change + "\n");
-
-            bw.close();
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     }//GEN-LAST:event_btnExportActionPerformed
 
     private void btnVoidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoidActionPerformed
@@ -894,13 +893,18 @@ public class POS extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoidActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         String total = txtTotal.getText();
         String cash = txtCash.getText();
         String change = txtChange.getText();
-        Receipt receiptWindow = new Receipt(model, total, cash, change);
-        receiptWindow.setLocationRelativeTo(null);
-        receiptWindow.setVisible(true);
+        if (total.isEmpty() || cash.isEmpty() || change.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Error: Total, Cash, and Change fields must not be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            String name = lblBarista.getText();
+            Receipt receiptWindow = new Receipt(model, name, total, cash, change);
+            receiptWindow.setLocationRelativeTo(null);
+            receiptWindow.setVisible(true);
+        }
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -908,14 +912,13 @@ public class POS extends javax.swing.JFrame {
             String filePath = "DTR.txt";
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;
-            String currentTime = new SimpleDateFormat("HH:mm:ss").format(new Date()); // Get current time in HH:mm:ss format
+            String currentTime = new SimpleDateFormat("HH:mm:ss").format(new Date()); 
 
-            // Read file and modify lines
             StringBuilder sb = new StringBuilder();
             while ((line = reader.readLine()) != null) {
-                if (line.matches(".+,\\d{2}:\\d{2}:\\d{2},\\d{2}:\\d{2}:\\d{2}")) { // Check if line has format name,time1,time2
+                if (line.matches(".+,\\d{2}:\\d{2}:\\d{2},\\d{2}:\\d{2}:\\d{2}")) { 
                     sb.append(line).append("\n");
-                } else if (line.matches(".+,\\d{2}:\\d{2}:\\d{2},.*")) { // Check if line has format name,time1,
+                } else if (line.matches(".+,\\d{2}:\\d{2}:\\d{2},.*")) { 
                     line = line.trim();
                     int commaIndex = line.lastIndexOf(",");
                     line = line.substring(0, commaIndex+1) + currentTime;
@@ -926,7 +929,6 @@ public class POS extends javax.swing.JFrame {
             }
             reader.close();
 
-            // Write modified lines to file
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             writer.write(sb.toString());
             writer.close();

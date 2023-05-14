@@ -280,30 +280,35 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLRegisterActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-    try {
-        String filePath = "DTR.txt";
-        File file = new File(filePath);
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String line;
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        while ((line = br.readLine()) != null) {
-            String[] data = line.split(",");
-            String name = data[0];
-            String timein = data[1];
-            String timeout = data[2];
-            String[] timeinParts = timein.split(":");
-            int timeinMin = Integer.parseInt(timeinParts[0]) * 60 + Integer.parseInt(timeinParts[1]);
-            String[] timeoutParts = timeout.split(":");
-            int timeoutMin = Integer.parseInt(timeoutParts[0]) * 60 + Integer.parseInt(timeoutParts[1]);
-            int pay = timeoutMin - timeinMin;
-            pay /= 60;
-            pay *= 10;
-            Object[] row = {name, timein, timeout, pay};
-            model.addRow(row);
+        try {
+            String filePath = "DTR.txt";
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            String line;
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            double rate = 10, OTrate=1.5;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                String name = data[0];
+                String timein = data[1];
+                String timeout = data[2];
+                String[] timeinParts = timein.split(":");
+                int timeinMin = Integer.parseInt(timeinParts[0]) * 60 + Integer.parseInt(timeinParts[1]);
+                String[] timeoutParts = timeout.split(":");
+                int timeoutMin = Integer.parseInt(timeoutParts[0]) * 60 + Integer.parseInt(timeoutParts[1]);
+                int pay = timeoutMin - timeinMin;
+                pay /= 60;
+                if (pay > 8) {
+                    pay = (int) ((8*rate) + ((pay-8)*rate*OTrate));
+                } else {
+                    pay *= rate;
+                }
+                Object[] row = {name, timein, timeout, pay};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainActionPerformed
