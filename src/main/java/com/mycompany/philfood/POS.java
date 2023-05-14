@@ -4,6 +4,7 @@
  */
 package com.mycompany.philfood;
 
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -33,6 +35,8 @@ public class POS extends javax.swing.JFrame {
      */
     public POS(String name) {
         initComponents();
+        Image icon = new ImageIcon(this.getClass().getResource("/images/icon.png")).getImage();
+        this.setIconImage(icon); 
         lblBarista.setText(name);
 
     }
@@ -415,11 +419,15 @@ public class POS extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("SF UI  Text", 1, 24)); // NOI18N
         jLabel7.setText("Change :");
 
+        txtTotal.setEditable(false);
+
         txtCash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCashActionPerformed(evt);
             }
         });
+
+        txtChange.setEditable(false);
 
         btnVoid.setFont(new java.awt.Font("SF UI  Text", 1, 36)); // NOI18N
         btnVoid.setText("VOID");

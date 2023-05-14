@@ -4,6 +4,9 @@
  */
 package com.mycompany.philfood;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author vjanr
@@ -15,6 +18,9 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        Image icon = new ImageIcon(this.getClass().getResource("/images/icon.png")).getImage();
+        this.setIconImage(icon);
+
     }
 
     /**

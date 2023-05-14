@@ -4,12 +4,14 @@
  */
 package com.mycompany.philfood;
 
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +25,8 @@ public class StaffLogIn extends javax.swing.JFrame {
      */
     public StaffLogIn() {
         initComponents();
+        Image icon = new ImageIcon(this.getClass().getResource("/images/icon.png")).getImage();
+        this.setIconImage(icon); 
     }
 
     /**

@@ -4,9 +4,11 @@
  */
 package com.mycompany.philfood;
 
+import java.awt.Image;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -21,6 +23,8 @@ public class AdminLogIn extends javax.swing.JFrame {
      */
     public AdminLogIn() {
         initComponents();
+        Image icon = new ImageIcon(this.getClass().getResource("/images/icon.png")).getImage();
+        this.setIconImage(icon);
     }
 
     /**

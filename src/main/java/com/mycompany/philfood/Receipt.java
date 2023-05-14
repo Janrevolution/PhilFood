@@ -4,7 +4,9 @@
  */
 package com.mycompany.philfood;
 
+import java.awt.Image;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,6 +41,8 @@ public class Receipt extends javax.swing.JFrame {
     }
     public Receipt() {
         initComponents();
+        Image icon = new ImageIcon(this.getClass().getResource("/images/icon.png")).getImage();
+        this.setIconImage(icon); 
     }
 
     /**

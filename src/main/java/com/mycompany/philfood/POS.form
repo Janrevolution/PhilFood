@@ -569,6 +569,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTotal">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCash">
       <Events>
@@ -576,6 +579,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtChange">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnVoid">
       <Properties>
