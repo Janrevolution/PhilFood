@@ -4,6 +4,9 @@
  */
 package com.mycompany.philfood;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -133,16 +136,43 @@ public class AdminLogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_checkShowPassActionPerformed
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
-        String adminUsername = "Admin";
-        String adminPassword = "123";
-        if (txtUsername.getText().equals(adminUsername) && txtPassword.getText().equals(adminPassword)) {
+        String adminUsername = "e3afed0047b08059d0fada10f400c1e5"; // MD5 hash of "Admin"
+        String adminPassword = "202cb962ac59075b964b07152d234b70"; // MD5 hash of "123"
+        String inputUsername = txtUsername.getText();
+        String inputPassword = txtPassword.getText();
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(inputUsername.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            inputUsername = hashtext;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(inputPassword.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            inputPassword = hashtext;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        if (inputUsername.equals(adminUsername) && inputPassword.equals(adminPassword)) {
             JFrame adminPage = new AdminPage();
             adminPage.setLocationRelativeTo(null);
             adminPage.setVisible(true);
             this.dispose();
         } else {
-        JOptionPane.showMessageDialog(null, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void btnMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainActionPerformed
