@@ -57,6 +57,7 @@ public class POS extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lblBarista = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
+        btnInventory = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         btnLechon = new javax.swing.JButton();
         btnCrispyPata = new javax.swing.JButton();
@@ -92,7 +93,6 @@ public class POS extends javax.swing.JFrame {
         btnVoid = new javax.swing.JButton();
         btnPrint = new javax.swing.JButton();
         btnPay = new javax.swing.JButton();
-        btnInventory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,6 +113,13 @@ public class POS extends javax.swing.JFrame {
             }
         });
 
+        btnInventory.setText("Inventory");
+        btnInventory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventoryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -125,6 +132,8 @@ public class POS extends javax.swing.JFrame {
                 .addGap(169, 169, 169)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnInventory)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogout)
                 .addContainerGap())
         );
@@ -133,7 +142,9 @@ public class POS extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLogout)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnLogout)
+                        .addComponent(btnInventory))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -463,13 +474,6 @@ public class POS extends javax.swing.JFrame {
             }
         });
 
-        btnInventory.setText("Inventory");
-        btnInventory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInventoryActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -493,12 +497,10 @@ public class POS extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(btnInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,9 +544,7 @@ public class POS extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnUpdate))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -985,10 +985,10 @@ public class POS extends javax.swing.JFrame {
                 for (int i = 0; i < jTable1.getRowCount(); i++) {
                     if (jTable1.getValueAt(i, 0).equals(name)) {
                         int quantity = Integer.parseInt(jTable1.getValueAt(i, 2).toString());
-                        if (quantity <= 0) {
-                            JOptionPane.showMessageDialog(this, "Not enough inventory for item: " + name, "Error", JOptionPane.ERROR_MESSAGE);
+                        if (inventoryQuantity <= 0) {
+                            JOptionPane.showMessageDialog(this, "We currently don't have stock for item: " + name, "Error", JOptionPane.ERROR_MESSAGE);
                             return;
-                        } else if (quantity == 50 && inventoryQuantity < quantity) {
+                        } else if (inventoryQuantity < quantity) {
                             JOptionPane.showMessageDialog(this, "Sorry, we only have " + inventoryQuantity + " stocks left for item: " + name, "Error", JOptionPane.ERROR_MESSAGE);
                             return;
                         }
@@ -1023,25 +1023,9 @@ public class POS extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        try {
-            File file = new File("InventoryTracker.txt");
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                String[] data = line.split(",");
-                String product = data[0];
-                String quantity = data[1];
-
-                // Add a new row to the table model
-                model.addRow(new Object[]{product, quantity});
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        StaffInventory staffinventory=new StaffInventory();
+        staffinventory.setLocationRelativeTo(null);
+        staffinventory.setVisible(true);
     }//GEN-LAST:event_btnInventoryActionPerformed
 
     /**
@@ -1090,7 +1074,7 @@ public class POS extends javax.swing.JFrame {
     private javax.swing.JButton btnExport;
     private javax.swing.JButton btnGiniling;
     private javax.swing.JButton btnHalohalo;
-    private javax.swing.JButton btnInventory;
+    private javax.swing.JToggleButton btnInventory;
     private javax.swing.JButton btnLechon;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnMangoShake;

@@ -157,8 +157,6 @@ public class AdminInventory extends javax.swing.JFrame {
 
     private void jTable1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable1AncestorAdded
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-
         try {
             File file = new File("InventoryTracker.txt");
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -185,7 +183,7 @@ public class AdminInventory extends javax.swing.JFrame {
         int quantityColumnIndex = 1; // Assuming the third column is the quantity column
 
         // Check if a row is selected and the quantity column exists
-        if (selectedRow != -1 && jTable1.getColumnCount() > quantityColumnIndex) {
+        if (jTable1.getColumnCount() > quantityColumnIndex) {
             // Get the new quantity entered by the user
             int newQuantity = Integer.parseInt(jTable1.getValueAt(selectedRow, quantityColumnIndex).toString());
 

@@ -1,4 +1,4 @@
-Lechon,38
+Lechon,-5
 Crispy Pata,10
 Sinugba,10
 Tinola,10
