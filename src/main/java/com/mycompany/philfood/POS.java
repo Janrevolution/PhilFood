@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -91,6 +92,7 @@ public class POS extends javax.swing.JFrame {
         btnVoid = new javax.swing.JButton();
         btnPrint = new javax.swing.JButton();
         btnPay = new javax.swing.JButton();
+        btnInventory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -461,6 +463,13 @@ public class POS extends javax.swing.JFrame {
             }
         });
 
+        btnInventory.setText("Inventory");
+        btnInventory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventoryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -472,11 +481,6 @@ public class POS extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -485,7 +489,17 @@ public class POS extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtChange)
-                                    .addComponent(txtCash))))
+                                    .addComponent(txtCash)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(btnInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -528,7 +542,9 @@ public class POS extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -942,21 +958,91 @@ public class POS extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-        if(txtCash.getText().isEmpty()){
-        JOptionPane.showMessageDialog(this, "Cash field is empty", "Error", JOptionPane.ERROR_MESSAGE);
+
+        if (txtCash.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cash field is empty", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         int cash = Integer.parseInt(txtCash.getText());
         int total = Integer.parseInt(txtTotal.getText());
-
         if (cash < total) {
             JOptionPane.showMessageDialog(this, "Insufficient Funds", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("InventoryTracker.txt"));
+            ArrayList<String> updatedLines = new ArrayList<>();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                String name = parts[0];
+                int inventoryQuantity = Integer.parseInt(parts[1]);
+
+                boolean isUpdated = false;
+
+                for (int i = 0; i < jTable1.getRowCount(); i++) {
+                    if (jTable1.getValueAt(i, 0).equals(name)) {
+                        int quantity = Integer.parseInt(jTable1.getValueAt(i, 2).toString());
+                        if (quantity <= 0) {
+                            JOptionPane.showMessageDialog(this, "Not enough inventory for item: " + name, "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        } else if (quantity == 50 && inventoryQuantity < quantity) {
+                            JOptionPane.showMessageDialog(this, "Sorry, we only have " + inventoryQuantity + " stocks left for item: " + name, "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+
+                        inventoryQuantity -= quantity;
+                        parts[1] = String.valueOf(inventoryQuantity);
+                        isUpdated = true;
+                        break;
+                    }
+                }
+
+                if (isUpdated) {
+                    updatedLines.add(parts[0] + "," + parts[1]);
+                } else {
+                    updatedLines.add(line); // Add the original line without modification
+                }
+            }
+            reader.close();
+
+            FileWriter fw = new FileWriter("InventoryTracker.txt", false);
+            for (String updatedLine : updatedLines) {
+                fw.write(updatedLine + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
         int change = cash - total;
         txtChange.setText(String.valueOf(change));
+
     }//GEN-LAST:event_btnPayActionPerformed
+
+    private void btnInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        try {
+            File file = new File("InventoryTracker.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                String product = data[0];
+                String quantity = data[1];
+
+                // Add a new row to the table model
+                model.addRow(new Object[]{product, quantity});
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnInventoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1004,6 +1090,7 @@ public class POS extends javax.swing.JFrame {
     private javax.swing.JButton btnExport;
     private javax.swing.JButton btnGiniling;
     private javax.swing.JButton btnHalohalo;
+    private javax.swing.JButton btnInventory;
     private javax.swing.JButton btnLechon;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnMangoShake;

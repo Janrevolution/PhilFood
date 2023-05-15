@@ -41,6 +41,7 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btnMain = new javax.swing.JButton();
+        btnInventory = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -72,15 +73,24 @@ public class AdminPage extends javax.swing.JFrame {
             }
         });
 
+        btnInventory.setText("Inventory");
+        btnInventory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventoryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(171, 171, 171)
+                .addContainerGap()
                 .addComponent(btnMain)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(185, 185, 185)
+                .addComponent(btnInventory)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -88,6 +98,7 @@ public class AdminPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnInventory)
                     .addComponent(jLabel2)
                     .addComponent(btnMain))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -318,6 +329,13 @@ public class AdminPage extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnMainActionPerformed
 
+    private void btnInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryActionPerformed
+        AdminInventory admininventory = new AdminInventory();
+        admininventory.setLocationRelativeTo(null);
+        admininventory.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnInventoryActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -354,6 +372,7 @@ public class AdminPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInventory;
     private javax.swing.JButton btnLRegister;
     private javax.swing.JButton btnMain;
     private javax.swing.JButton btnPay;

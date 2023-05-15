@@ -1,1 +1,18 @@
-Lechon,10
+Lechon,38
+Crispy Pata,10
+Sinugba,10
+Tinola,10
+Sinigang,10
+Bulalo,10
+Bistek,10
+Caldereta,10
+Giniling,10
+Halo-Halo,9
+Sago't Gulaman,10
+Taho,10
+Buko Salad,10
+Buko Pandan,10
+Tapioca,10
+Mango Shake,10
+Avocado Shake,10
+Sikwate,20
