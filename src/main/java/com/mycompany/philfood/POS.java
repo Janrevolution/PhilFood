@@ -90,6 +90,7 @@ public class POS extends javax.swing.JFrame {
         txtChange = new javax.swing.JTextField();
         btnVoid = new javax.swing.JButton();
         btnPrint = new javax.swing.JButton();
+        btnPay = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -451,6 +452,15 @@ public class POS extends javax.swing.JFrame {
             }
         });
 
+        btnPay.setBackground(new java.awt.Color(255, 255, 0));
+        btnPay.setFont(new java.awt.Font("SF UI  Text", 1, 36)); // NOI18N
+        btnPay.setText("PAY");
+        btnPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPayActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -486,9 +496,11 @@ public class POS extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnVoid, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnVoid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnPrint)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -507,9 +519,10 @@ public class POS extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVoid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnVoid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPay)
+                            .addComponent(btnPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -794,7 +807,7 @@ public class POS extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[] {
             btnAvocadoShake.getText(),
-            price = 900,
+            price = 90,
             qty = 1,
             total = qty * price,
         });
@@ -838,16 +851,7 @@ public class POS extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void txtCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCashActionPerformed
-        int cash = Integer.parseInt(txtCash.getText());
-        int total = Integer.parseInt(txtTotal.getText());
 
-        if (cash < total) {
-            JOptionPane.showMessageDialog(this, "Insufficient Funds", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        int change = cash - total;
-        txtChange.setText(String.valueOf(change));
     }//GEN-LAST:event_txtCashActionPerformed
 
     private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
@@ -886,10 +890,9 @@ public class POS extends javax.swing.JFrame {
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        sum = 0;
-        txtTotal.setText(Integer.toString(sum));
-        txtCash.setText(Integer.toString(sum));
-        txtChange.setText(Integer.toString(sum));
+        txtTotal.setText(null);
+        txtCash.setText(null);
+        txtChange.setText(null);
     }//GEN-LAST:event_btnVoidActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
@@ -919,7 +922,6 @@ public class POS extends javax.swing.JFrame {
                 if (line.matches(".+,\\d{2}:\\d{2}:\\d{2},\\d{2}:\\d{2}:\\d{2}")) { 
                     sb.append(line).append("\n");
                 } else if (line.matches(".+,\\d{2}:\\d{2}:\\d{2},.*")) { 
-                    line = line.trim();
                     int commaIndex = line.lastIndexOf(",");
                     line = line.substring(0, commaIndex+1) + currentTime;
                     sb.append(line).append("\n");
@@ -938,6 +940,23 @@ public class POS extends javax.swing.JFrame {
         System.exit(0);
 
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
+        if(txtCash.getText().isEmpty()){
+        JOptionPane.showMessageDialog(this, "Cash field is empty", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int cash = Integer.parseInt(txtCash.getText());
+        int total = Integer.parseInt(txtTotal.getText());
+
+        if (cash < total) {
+            JOptionPane.showMessageDialog(this, "Insufficient Funds", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int change = cash - total;
+        txtChange.setText(String.valueOf(change));
+    }//GEN-LAST:event_btnPayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -988,6 +1007,7 @@ public class POS extends javax.swing.JFrame {
     private javax.swing.JButton btnLechon;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnMangoShake;
+    private javax.swing.JButton btnPay;
     private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnSagotGulaman;
     private javax.swing.JButton btnSikwate;
