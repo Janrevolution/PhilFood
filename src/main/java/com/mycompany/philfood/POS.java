@@ -896,7 +896,7 @@ public class POS extends javax.swing.JFrame {
         String total = txtTotal.getText();
         String cash = txtCash.getText();
         String change = txtChange.getText();
-        if (total.isEmpty() || cash.isEmpty() || change.isEmpty()) {
+        if (total.isEmpty() || cash.isEmpty() || change.isEmpty() || total.equals("0") ||cash.equals("0")||change.equals("0")) {
             JOptionPane.showMessageDialog(this, "Error: Total, Cash, and Change fields must not be empty.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
