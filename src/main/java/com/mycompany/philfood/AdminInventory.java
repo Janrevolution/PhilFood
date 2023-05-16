@@ -182,15 +182,16 @@ public class AdminInventory extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1AncestorAdded
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // Get the selected row and column index in the jTable
         int selectedRow = jTable1.getSelectedRow();
-        int quantityColumnIndex = 1; // Assuming the third column is the quantity column
+        int quantityColumnIndex = 1; 
 
-        // Check if a row is selected and the quantity column exists
         if (jTable1.getColumnCount() > quantityColumnIndex) {
-            // Get the new quantity entered by the user
             int newQuantity = Integer.parseInt(jTable1.getValueAt(selectedRow, quantityColumnIndex).toString());
-
+            
+            if (newQuantity <= -1) {
+                JOptionPane.showMessageDialog(this, "Error: Input should not be negative. Please enter a non-negative integer.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+            }
             String filePath = "InventoryTracker.txt";
             ArrayList<String> updatedLines = new ArrayList<>();
 
